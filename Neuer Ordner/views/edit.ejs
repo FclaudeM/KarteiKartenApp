@@ -1,0 +1,89 @@
+<h1>Edit Stack</h1>
+<a href="/index"><button>Back</button></a>
+<!-- Form for adding a new card -->
+<form action="/add" method="POST">
+    <label for="sideone">Side One:</label><br>
+    <input type="text" id="sideone" name="sideone"><br>
+    <label for="sidetwo">Side Two:</label><br>
+    <input type="text" id="sidetwo" name="sidetwo"><br>
+    <input type="submit" value="Add Card">
+</form>
+
+<!-- List of existing cards -->
+<% cards.forEach(function(card) { %>
+    <div>
+        <h2><%= card.sideone %></h2>
+        <h2><%= card.sidetwo %></h2>
+        <a href="/edit/<%= card.id %>"><button>Edit</button></a>
+        <button onclick="deleteCard('<%= card.id %>', event)">Delete</button>
+    </div>
+<% }); %>
+
+<script>
+    function deleteCard(id, event) {
+        event.preventDefault();
+        fetch('/delete/' + id, { // Replace ':id' with the actual id
+            method: 'DELETE',
+        })
+        .then(response => response.text())
+        .then(() => window.location.href = '/edit');
+    }
+    </script>
+    
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+    }
+
+    h1 {
+        color: #333;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    h2 {
+        text-align: center;
+        color: #666;
+        margin: 50px 0; 
+        padding: 20px; 
+        outline: 2px solid #333; 
+    }
+
+    #del input[type="submit"] {
+    display: block;
+    width: 200px;
+    height: 50px;
+    margin: 20px auto;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+    button {
+        display: block;
+        width: 200px;
+        height: 50px;
+        margin: 20px auto;
+        background-color: #4CAF50; 
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+</style>

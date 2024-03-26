@@ -1,0 +1,63 @@
+<h1>Karteikarten App</h1>
+<h2 id="card" onclick="toggle()"><%= card.sideone %></h2>
+<a href="/next"><button>Next Card</button></a>
+<a href="/edit"><button>Edit Stack</button></a>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+    }
+
+    h1 {
+        color: #333;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    h2 {
+        text-align: center;
+        color: #666;
+        margin: 50px 0; 
+        padding: 20px; 
+        padding-bottom: 7vh;
+        padding-top: 7vh;
+        outline: 2px solid #333; 
+    }
+
+    button {
+        display: block;
+        width: 200px;
+        height: 50px;
+        margin: 20px auto;
+        background-color: #4CAF50; 
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+</style>
+
+<script>
+    var currentSide = 'sideone';
+
+    function toggle() {
+        var card = document.getElementById('card');
+        if (currentSide === 'sideone') {
+            card.innerText = '<%= card.sidetwo %>';
+            currentSide = 'sidetwo';
+        } else {
+            card.innerText = '<%= card.sideone %>';
+            currentSide = 'sideone';
+        }
+    }
+</script>
